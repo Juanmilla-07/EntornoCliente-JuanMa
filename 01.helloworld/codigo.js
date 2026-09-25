@@ -49,3 +49,23 @@ x = "8";
 console.log(x - 2); // El menos es el único comando capaz de restar un int y un string siempre y cuando sea número los dos valores
                     // y que no sean por ejemplo (b - 7)
 // parseInt("101", 2) = 5; el número de la derecha (2) sirve para establecer el sistema numérico (binario, hexadecimal, etc)
+
+function carTypes(name){
+  if (name === "Honda"){
+    return name;
+  } else {
+    return "Lo siento no tenemos " + name;
+  }
+}
+var car = {myCar: "Saturn", getCar: carTypes("Honda"), special: "Toyota"};
+console.log(car.myCar);
+console.log(car.getCar);
+console.log(car.special);
+
+var car2 = {manyCars: {a: "Saab", b: "Jeep"}, 7: "Mazda"};
+console.log(car2.manyCars.a); // Saab
+console.log(car2.manyCars.b); // Jeep
+console.log(car2[7]) // Si la key es un valor numerico se pone entre corchetes
+
+var name2 = "Bob", time = "Hoy";
+console.log("Hola $(name2) como estás $(time)"); // Sin necesidad de concatenar con el simbolo "+"
