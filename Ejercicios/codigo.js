@@ -30,9 +30,13 @@ for (let i = 0; i < datos.length; i++) {
   console.log(`Profesor: ${datos[i].nombre} Apellidos: ${datos[i].apellidos} Teléfono: ${datos[i].telefono}- 
                 Asignatura: ${datos[i].asignaturas.nombre}`);
 }
-for(const i of datos){
-    console.log(i);
-}
+/*
+OTRA FORMA DE RECORRERLO
+  for(const i of datos){
+      console.log(i);
+  } 
+*/
+
 
 // EJERCICIO 2: Dado un código de una asignatura muestra el nombre y el apellido del profe
 var codigoBuscado = 4444;
@@ -41,7 +45,7 @@ let encontrado = false;
 
 for(let i = 0; i < datos.length; i++){
     if (datos[i].asignaturas.codigo === codigoBuscado){
-        console.log(`Profesor: ${datos[i].nombre} ${datos[i].apellidos}`)
+        console.log(`Profesor: ${datos[i].nombre} ${datos[i].apellidos}`);
         encontrado = true;
         break;
     }
@@ -50,3 +54,10 @@ if (encontrado != true){
     console.log("No hay ninguna asignatura con ese código");
 }
 
+// VAMOS A HACER QUE LOS DATOS RECOGIDOS EN UN FORMULARIO SE AÑADAN A NUESTRO ARRAYD (CREO)
+
+var texto1 = document.getElementById("nombre");
+var btn1 = document.getElementById("btn");
+btn.addEventListener("click", function (){
+  console.log(texto1.value);
+})
