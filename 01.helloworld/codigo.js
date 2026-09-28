@@ -68,4 +68,4 @@ console.log(car2.manyCars.b); // Jeep
 console.log(car2[7]) // Si la key es un valor numerico se pone entre corchetes
 
 var name2 = "Bob", time = "Hoy";
-console.log("Hola $(name2) como estás $(time)"); // Sin necesidad de concatenar con el simbolo "+"
+console.log('Hola $(name2) como estás $(time)'); // Sin necesidad de concatenar con el simbolo "+"
