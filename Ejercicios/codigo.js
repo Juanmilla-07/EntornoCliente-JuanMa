@@ -57,7 +57,13 @@ if (encontrado != true){
 // VAMOS A HACER QUE LOS DATOS RECOGIDOS EN UN FORMULARIO SE AÑADAN A NUESTRO ARRAYD (CREO)
 
 var texto1 = document.getElementById("nombre");
+var texto2 = document.getElementById("apellido");
+var texto = document.getElementById("telefono");
 var btn1 = document.getElementById("btn");
-btn.addEventListener("click", function (){
-  console.log(texto1.value);
+btn1.addEventListener("click", function (){
+  var profe = {
+    nombre: texto1.value,
+    apellido: texto2.value,
+    telefono: texto3.value
+  };
 })
