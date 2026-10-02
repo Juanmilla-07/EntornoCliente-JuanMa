@@ -14,3 +14,5 @@ switch (cosa){
     default:
         console.log(cosa);
 }
+
+cosa != 3 ? console.log("El valor es 3") : console.log("El valor es distinto"); // Operador Ternario
