@@ -78,10 +78,10 @@ class CuentaCorriente {
 // Creamos nuestro objeto cuentaCorriente
 var cuentaCorriente = new CuentaCorriente();
 // Le añado sus datos
-cuentaCorriente.nombreClienteNuevo = "Paco";
-cuentaCorriente.numeroCuentaNuevo = "ABC123";
-cuentaCorriente.tipoInteresNUevo = 12.5;
-cuentaCorriente.saldoNuevo = 3500.76;
+cuentaCorriente.nombreCliente = "Paco";
+cuentaCorriente.numeroCuenta = "ABC123";
+cuentaCorriente.tipoInteres = 12.5;
+cuentaCorriente.saldo = 3500.76;
 
 // Muestro los datos por pantalla
 console.log(
@@ -130,4 +130,4 @@ console.log(
 );
 
 // Compruebo si falla al poner un importe mayor que el saldo
-console.log(cuentaCorriente.transferencia(cuentaDestino, 3000));
+console.log(cuentaCorriente.transferencia(cuentaDestino, 8000));
