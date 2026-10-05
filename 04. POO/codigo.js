@@ -1,43 +1,43 @@
 class CuentaCorriente {
   // Creo el constructor con parámetros
-  constructor(nombreCliente, numeroCuenta, tipoInteres, saldo) {
-    // Los nombres que van con this.var no pueden ser iguales // Ejemplo this.var = var es por eso que les añado un _ pq si no da fallo
-    this._nombreCliente = nombreCliente;
-    this._numeroCuenta = numeroCuenta;
-    this._tipoInteres = tipoInteres;
-    this._saldo = saldo;
+  constructor(nombre, numero, interes, saldo) {
+    // LOS NOMBRES DE LAS VARIABLES NO PUEDEN PARECERSE A LOS GETTERS NI A LOS SETTERS YA QUE PUEDE PEGAR FALLO
+    this.nombre = nombre;
+    this.numero = numero;
+    this.interes = interes;
+    this.saldo = saldo;
   }
 
   // LO HAGO ASI PARA VERLO MÁS CLARO al final se hacen como en java, solo hay q tener en cuenta el guion bajo
   get nombreCliente() {
-    return this._nombreCliente;
+    return this.nombre;
   }
   set nombreCliente(nombreNuevo) {
-    this._nombreCliente = nombreNuevo;
+    this.nombre = nombreNuevo;
   }
 
   // Número de Cuenta
   get numeroCuenta() {
-    return this._numeroCuenta;
+    return this.numero;
   }
   set numeroCuenta(numeroNuevo) {
-    this._numeroCuenta = numeroNuevo;
+    this.numero = numeroNuevo;
   }
 
   // Tipo de Interes
   get tipoInteres() {
-    return this._tipoInteres;
+    return this.interes;
   }
   set tipoInteres(nuevoInteres) {
-    this._tipoInteres = nuevoInteres;
+    this.interes = nuevoInteres;
   }
 
   // Saldo
-  get saldo() {
-    return this._saldo;
+  get saldoCliente() {
+    return this.saldo;
   }
-  set saldo(saldoNuevo) {
-    this._saldo = saldoNuevo;
+  set saldoCliente(saldoNuevo) {
+    this.saldo = saldoNuevo;
   }
 
   // MÉTODOS DE OPERACIÓN 
@@ -47,7 +47,7 @@ class CuentaCorriente {
     if (cantidad < 0) {
       return false;
     }
-    // Esto sirve para actualizar la contraseña, aqui se usa sin guión pq estamos llamando a los metodos get y set
+    // Esto sirve para actualizar el saldo, aqui se usa sin guión pq estamos llamando a los metodos get y set
     this.saldo += cantidad;
     return true;
   }
