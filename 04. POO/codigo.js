@@ -1,7 +1,9 @@
 class CuentaCorriente {
   // Creo el constructor con parámetros
   constructor(nombre, numero, interes, saldo) {
-    // LOS NOMBRES DE LAS VARIABLES NO PUEDEN PARECERSE A LOS GETTERS NI A LOS SETTERS YA QUE PUEDE PEGAR FALLO
+    // LOS NOMBRES DE LAS VARIABLES NO PUEDEN PARECERSE A LOS GETTERS NI A LOS SETTERS YA QUE PUEDE PEGAR FALLO, lo más facil es
+    // que los getters y los setters se llamen getNombreCliente por ejemplo, aunque el metodo sea get el nombre también podría
+    // ser get getNombreCliente (Esto es solo en caso de que me raye un montón) y asi poder llamar a las variables por un nombre adecuado
     this.nombre = nombre;
     this.numero = numero;
     this.interes = interes;
@@ -40,7 +42,7 @@ class CuentaCorriente {
     this.saldo = saldoNuevo;
   }
 
-  // MÉTODOS DE OPERACIÓN 
+  // MÉTODOS DE OPERACIÓN
 
   // Sumar dinero
   ingreso(cantidad) {
@@ -66,8 +68,8 @@ class CuentaCorriente {
   transferencia(cuentaDestino, importe) {
     // Primero hacemos un reintegro en nuestra cuentaCorriente es por eso q pone this.reintegro
     if (this.reintegro(importe)) {
-        // Si es true entramos aquí, entonces nuestro objeto cuentaDestino activara el metodo ingreso con el importe que recibia el metodo,
-        // es por eso que es importante mandar un objeto para poder activar el metodo
+      // Si es true entramos aquí, entonces nuestro objeto cuentaDestino activara el metodo ingreso con el importe que recibia el metodo,
+      // es por eso que es importante mandar un objeto para poder activar el metodo
       cuentaDestino.ingreso(importe);
       return true;
     }
@@ -86,7 +88,7 @@ cuentaCorriente.saldo = 3500.76;
 // Muestro los datos por pantalla
 console.log(
   `Cuenta: Nombre: ${cuentaCorriente.nombreCliente} Número Cuenta: ${cuentaCorriente.numeroCuenta} 
-  Interes: ${cuentaCorriente.tipoInteres} Saldo = ${cuentaCorriente.saldo}`
+  Interes: ${cuentaCorriente.tipoInteres} Saldo = ${cuentaCorriente.saldo}`,
 );
 
 // Hago un ingreso positivo para comprobar si funciona
@@ -112,7 +114,7 @@ var cuentaDestino = new CuentaCorriente("Gema", "DEF456", 10, 0);
 // Muestro por pantalla los datos de la cuentaDestino
 console.log(
   `Cuenta Destino Antes Ingreso: Nombre: ${cuentaDestino.nombreCliente} Número Cuenta: ${cuentaDestino.numeroCuenta} 
-  Interes: ${cuentaDestino.tipoInteres} Saldo = ${cuentaDestino.saldo}`
+  Interes: ${cuentaDestino.tipoInteres} Saldo = ${cuentaDestino.saldo}`,
 );
 
 // Pruebo a hacer una transferencia con todos correctos
@@ -121,13 +123,51 @@ cuentaCorriente.transferencia(cuentaDestino, 1000);
 // Muestro los datos de la cuentaDestino depsues de la transferencia
 console.log(
   `Cuenta Destino Después Ingreso: Nombre: ${cuentaDestino.nombreCliente} Número Cuenta: ${cuentaDestino.numeroCuenta} 
-  Interes: ${cuentaDestino.tipoInteres} Saldo = ${cuentaDestino.saldo}`
+  Interes: ${cuentaDestino.tipoInteres} Saldo = ${cuentaDestino.saldo}`,
 );
 
 // Muestro el saldo de la cuentaCorriente depsues de la transferencia
 console.log(
-  `Saldo Nuevo en la cuenta correinte después del reintegro: ${cuentaCorriente.saldo}`
+  `Saldo Nuevo en la cuenta correinte después del reintegro: ${cuentaCorriente.saldo}`,
 );
 
 // Compruebo si falla al poner un importe mayor que el saldo
 console.log(cuentaCorriente.transferencia(cuentaDestino, 8000));
+
+// EJERCICIO 2
+var cuenta1 = new CuentaCorriente("Cuenta1", "1111", 10, 1000);
+var cuenta2 = new CuentaCorriente("Cuenta2", "2222", 10, 2000);
+var cuenta3 = new CuentaCorriente("Cuenta3", "3333", 10, 3000);
+var banco = [cuenta1, cuenta2, cuenta3];
+var saldoMaximo = 0;
+// Creo un objeto nulo donde luego meto los valores de la cuenta con más saldo
+var cuentaSaldoMaximo = null;
+var saldoTotal = 0;
+var totalCuentas = 0;
+for (const i of banco) {
+  if (i.saldo > saldoMaximo) {
+    saldoMaximo = i.saldo;
+    cuentaSaldoMaximo = i;
+  }
+  saldoTotal += i.saldo;
+  totalCuentas += 1;
+}
+
+console.log(
+  `Cuenta con más dinero: ${cuentaSaldoMaximo.nombreCliente} ${cuentaSaldoMaximo.numeroCuenta} 
+  ${cuentaSaldoMaximo.interes} ${cuentaSaldoMaximo.saldo}`,
+);
+console.log(`El saldo total de las cuentas es: ${saldoTotal} repartido en ${totalCuentas} cuentas` );
+var mediaBanco = saldoTotal/totalCuentas;
+console.log(`La media de saldo en el banco es: ${mediaBanco}`);
+
+/*
+OTRA FORMA DE HACERLO
+var ordenado = [...banco].sort((a, b) => b.saldo - a.saldo);
+console.log(ordenado[0]);  
+
+OTRA MÁS
+bancon.sort(a,b) => b.saldo - a.saldo;
+console.log(banco[0])
+*/
+

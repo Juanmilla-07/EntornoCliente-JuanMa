@@ -1,130 +1,127 @@
-let numero = 12;
-for (i = 0; i <= 10; i++) {
-  console.log(numero + " x " + i + " = " + numero * i);
-}
-
-var datos = [
-  {
-    dni: "11111111A",
-    nombre: "Pepe",
-    apellidos: "Lopez Perez",
-    telefono: "66666666666",
-    asignaturas: [{ nombre: "DWEC", codigo: 1111 }],
-  },
-  {
-    dni: "222222222B",
-    nombre: "María",
-    apellidos: "García Gómez",
-    telefono: "77777777777",
-    asignaturas: [{ nombre: "DWES", codigo: 2222 }],
-  },
-  {
-    dni: "33333333C",
-    nombre: "Juan",
-    apellidos: "Sánchez Ruíz",
-    telefono: "88888888888",
-    asignaturas: [{ nombre: "DIW", codigo: 3333 }],
-  },
-];
-
-// EJERCICIO 1: Listado completo en consola de todos los profesores junto a su asignatura
-for (let i = 0; i < datos.length; i++) {
-  for (let j = 0; j < datos[i].asignaturas.length; j++) {
-    console.log(`Profesor: ${datos[i].nombre} Apellidos: ${datos[i].apellidos} Teléfono: ${datos[i].telefono}- 
-                Asignatura: ${datos[i].asignaturas[j].nombre} ${datos[i].asignaturas[j].codigo}`);
-  }
-}
-/*
-OTRA FORMA DE RECORRERLO
-  for(const i of datos){
-      console.log(i);
-  } 
-*/
-
-// EJERCICIO 2: Dado un código de una asignatura muestra el nombre y el apellido del profe
-var codigoBuscado = 4444;
-
-let encontrado = false;
-
-for (let i = 0; i < datos.length; i++) {
-  if (datos[i].asignaturas.codigo === codigoBuscado) {
-    console.log(`Profesor: ${datos[i].nombre} ${datos[i].apellidos}`);
-    encontrado = true;
-    break;
-  }
-}
-if (encontrado != true) {
-  console.log("No hay ninguna asignatura con ese código");
-}
-
-// Crear un formulario para dar de alta profesores introduciendo el DNI nombre apellidos y teléfono
-// del mismo
-
-var texto1 = document.getElementById("dni");
-var texto2 = document.getElementById("nombre");
-var texto3 = document.getElementById("apellido");
-var texto4 = document.getElementById("telefono");
-var btn1 = document.getElementById("btn");
-btn1.addEventListener("click", function () {
-  var profe = {
-    dni: texto1.value,
-    nombre: texto2.value,
-    apellidos: texto3.value,
-    telefono: texto4.value,
-    asignaturas: [],
-  };
-  datos.push(profe);
-  for (const i of datos) {
-    console.log(i.dni, i.nombre, i.apellidos, i.telefono);
-  }
-});
-
-// Más abajo añadir otro formulario para añadir asignaturas a un profesor
-// indicando código de la asignatura nombre de la asignatura y DNI del profesor que la imparte
-var dniAsignatura = document.getElementById("dniProfesor");
-var codigoAsignatura = document.getElementById("codigoAsignatura");
-var nombreAsignatura = document.getElementById("nombreAsignatura");
-var btn2 = document.getElementById("btn-asignatura");
-
-btn2.addEventListener("click", function () {
-  // Buscamos al profesor
-  let encontrado = false;
-  for (let i = 0; i < datos.length; i++) {
-    if (datos[i].dni == dniAsignatura.value) {
-      // Creamos la asignatura
-      encontrado = true;
-      var asignatura = {
-        nombre: nombreAsignatura.value,
-        codigo: codigoAsignatura.value,
-      };
-
-      // La añadimos al profesor
-      datos[i].asignaturas.push(asignatura);
-
-      console.log("Asignatura añadida correctamente.");
-      break;
+// Función constructora sencilla
+function Tiempo(año, mes, dia, hora, minuto, segundo) {
+    // 1. Si todos los parámetros son 0, usamos la fecha y hora actual
+    if (año === 0 && mes === 0 && dia === 0 && hora === 0 && minuto === 0 && segundo === 0) {
+        let fechaActual = new Date();
+        this.año = fechaActual.getFullYear();
+        this.mes = fechaActual.getMonth() + 1; // +1 porque JS cuenta los meses de 0 a 11
+        this.dia = fechaActual.getDate();
+        this.hora = fechaActual.getHours();
+        this.minuto = fechaActual.getMinutes();
+        this.segundo = fechaActual.getSeconds();
+    } else {
+        // Si nos dan valores, los guardamos directamente en las propiedades
+        this.año = año;
+        this.mes = mes;
+        this.dia = dia;
+        this.hora = hora;
+        this.minuto = minuto;
+        this.segundo = segundo;
     }
-  }
-  if (!encontrado) {
-    // Si no encuentra al profesor
-    console.log("No se encontró ningún profesor con ese DNI.");
-  }
-});
-// Añadir un tercer y último formulario donde introduciendo el código de la asignatura
-// me indique el profesor que imparte esa asignatura
 
-var codigoBuscado = document.getElementById("codigoBuscar");
-var btn3 = document.getElementById("btn-buscar");
+    // --- GETTERS ---
+    this.getAño = function() { return this.año; };
+    this.getMes = function() { return this.mes; };
+    this.getDia = function() { return this.dia; };
+    this.getHora = function() { return this.hora; };
+    this.getMinuto = function() { return this.minuto; };
+    this.getSegundo = function() { return this.segundo; };
 
-btn3.addEventListener("click", function () {
-  let encontrado = false;
-  for (let i = 0; i < datos.length; i++) {
-    for (let j = 0; j < datos[i].asignaturas.length; j++) {
-      if (datos[i].asignaturas[j].codigo == codigoBuscado.value) {
-        console.log(
-          `Profesor: ${datos[i].dni} ${datos[i].nombre} ${datos[i].apellidos} ${datos[i].telefono}`,
-        );
-      }
-    }
-  }
-});
+    // --- SETTERS ---
+    this.setAño = function(nuevoAño) { this.año = nuevoAño; };
+    this.setMes = function(nuevoMes) { this.mes = nuevoMes; };
+    this.setDia = function(nuevoDia) { this.dia = nuevoDia; };
+    this.setHora = function(nuevaHora) { this.hora = nuevaHora; };
+    this.setMinuto = function(nuevoMinuto) { this.minuto = nuevoMinuto; };
+    this.setSegundo = function(nuevoSegundo) { this.segundo = nuevoSegundo; };
+
+    // --- FORMATOS COMPLETOS ---
+    this.getFechaCompleta = function() {
+        return this.dia + "/" + this.mes + "/" + this.año;
+    };
+
+    this.getHoraCompleta = function() {
+        return this.hora + ":" + this.minuto + ":" + this.segundo;
+    };
+
+    // --- BISIESTO ---
+    this.esBisiesto = function() {
+        // Un año es bisiesto si es divisible por 4 y no por 100, o si es divisible por 400
+        return (this.año % 4 === 0 && this.año % 100 !== 0) || (this.año % 400 === 0);
+    };
+
+    // --- COMPARACIONES ---
+    // Usamos el objeto Date internamente solo para comparar fácilmente
+    this.obtenerMilisegundos = function() {
+        return new Date(this.año, this.mes - 1, this.dia, this.hora, this.minuto, this.segundo).getTime();
+    };
+
+    this.esMayor = function(otroTiempo) {
+        return this.obtenerMilisegundos() > otroTiempo.obtenerMilisegundos();
+    };
+
+    this.esMenor = function(otroTiempo) {
+        return this.obtenerMilisegundos() < otroTiempo.obtenerMilisegundos();
+    };
+
+    this.esIgual = function(otroTiempo) {
+        return this.obtenerMilisegundos() === otroTiempo.obtenerMilisegundos();
+    };
+
+    // --- SUMAR HORA ---
+    this.sumaHora = function(otroTiempo) {
+        this.hora += otroTiempo.getHora();
+        this.minuto += otroTiempo.getMinuto();
+        this.segundo += otroTiempo.getSegundo();
+
+        // Si los segundos superan 59, sumamos un minuto
+        if (this.segundo >= 60) {
+            this.minuto += Math.floor(this.segundo / 60);
+            this.segundo = this.segundo % 60;
+        }
+
+        // Si los minutos superan 59, sumamos una hora
+        if (this.minuto >= 60) {
+            this.hora += Math.floor(this.minuto / 60);
+            this.minuto = this.minuto % 60;
+        }
+
+        // Si las horas superan 23, sumamos días
+        if (this.hora >= 24) {
+            this.dia += Math.floor(this.hora / 24);
+            this.hora = this.hora % 24;
+        }
+    };
+}
+
+// ==========================================
+// EJEMPLOS DE USO
+// ==========================================
+
+console.log("--- Crear con fecha actual ---");
+let tiempoActual = new Tiempo(0, 0, 0, 0, 0, 0);
+console.log("Fecha actual:", tiempoActual.getFechaCompleta());
+console.log("Hora actual:", tiempoActual.getHoraCompleta());
+
+console.log("\n--- Crear fechas personalizadas ---");
+let t1 = new Tiempo(2024, 2, 28, 23, 30, 0);
+let t2 = new Tiempo(2023, 10, 15, 12, 0, 0);
+
+console.log("t1:", t1.getFechaCompleta(), t1.getHoraCompleta());
+console.log("t2:", t2.getFechaCompleta(), t2.getHoraCompleta());
+
+console.log("\n--- Comprobar si es bisiesto ---");
+console.log("¿2024 es bisiesto?:", t1.esBisiesto()); // true
+console.log("¿2023 es bisiesto?:", t2.esBisiesto()); // false
+
+console.log("\n--- Comparar tiempos ---");
+console.log("¿t1 es mayor que t2?:", t1.esMayor(t2)); // true
+console.log("¿t1 es menor que t2?:", t1.esMenor(t2)); // false
+console.log("¿t1 es igual a t2?:", t1.esIgual(t2));   // false
+
+console.log("\n--- Sumar horas ---");
+let tiempoASumar = new Tiempo(0, 0, 0, 2, 40, 0); // 2 horas y 40 minutos
+
+console.log("t1 antes de sumar:", t1.getFechaCompleta(), t1.getHoraCompleta());
+t1.sumaHora(tiempoASumar);
+console.log("t1 después de sumar 2h 40m:", t1.getFechaCompleta(), t1.getHoraCompleta());
